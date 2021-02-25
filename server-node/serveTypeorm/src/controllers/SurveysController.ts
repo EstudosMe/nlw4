@@ -31,20 +31,19 @@ class SurveysController {
         }
     }
 
-    async listAll(req: Request, res:Response){
-        try{
+    async listAll(req: Request, res: Response) {
+        try {
             const surveyRepository = getCustomRepository(SurveysRepository)
-    
+
             const allSurveys = await surveyRepository.find()
-            
-            if(allSurveys.length == 0){
-                return res.status(200).json({message:"Não temos nenhuma pesquisa!"})
+
+            if (allSurveys.length == 0) {
+                return res.status(200).json({ message: "Não temos nenhuma pesquisa!" })
             }
             return res.status(200).json(allSurveys)
-        }catch(e){
-            console.log({error: e})
-            return res.status(500).json({error:"Erro interno no servidor!"})
-            
+        } catch (e) {
+            console.log({ error: e })
+            return res.status(500).json({ error: "Erro interno no servidor!" })
         }
     }
 }
