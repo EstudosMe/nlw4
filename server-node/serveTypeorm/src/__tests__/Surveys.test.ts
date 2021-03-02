@@ -27,9 +27,11 @@ describe("Users", () => {
             })
 
         expect(response.status).toBe(400)
+        expect(response.body).toHaveProperty("error")
+
     })
-    
-    it("Should be able to get all surveys", async () =>{
+
+    it("Should be able to get all surveys", async () => {
         await request(app).post("/surveys")
             .send({
                 title: "Segundo TDD",
@@ -38,6 +40,7 @@ describe("Users", () => {
 
         const response = await request(app).get("/surveys")
 
-        expect(response.body.length).toBe(2)
+        expect(response.body.length).toBeGreaterThan(1)
+        expect(response.body[0]).toHaveProperty("id")
     })
 })
